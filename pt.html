@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@200;400;600;700&display=swap" rel="stylesheet">
+  <title>Johnny's Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Spectral', serif;
+      background-color: #2b241d;
+      color: #f4f4f4;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      font-weight: 200;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 200;
+    }
+
+    header p {
+      font-size: 2rem;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.8;
+    }
+
+    header p span {
+      color: #d88f8f;
+    }
+
+    header p .highlight {
+      color: #91c5e4;
+    }
+
+    .section-header {
+      background: #f0f0f0;
+      color: #2b241d;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .gallery {
+      position: relative;
+      padding: 40px 60px;
+      background: #2b241d;
+    }
+
+    .project-middle-line {
+      position: absolute;
+      top: 40px; /* aligns with top padding of .gallery */
+      bottom: 40px; /* aligns with bottom padding */
+      left: 50%;
+      width: 11px;
+      background-color: #eed3d3;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .project {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .project-text {
+      flex: 1;
+      font-family: "Nanum Myeongjo", serif;
+      min-width: 200px;
+      font-size: 36px;
+      text-align: right;
+      z-index: 1; /* so it appears above the line */
+      font-weight: 400;
+    }
+
+    .project-text-r {
+      flex: 1;
+      font-family: "Nanum Myeongjo", serif;
+      min-width: 200px;
+      font-size: 36px;
+      text-align: left;
+      z-index: 1; /* so it appears above the line */
+      font-weight: 400;
+    }
+
+    .project-subtitle {
+        font-size: 24px;
+        font-weight: 200;
+    }
+
+    .project-text, .project-text-r {
+  display: flex;
+  flex-direction: column;
+  height: 150px; /* set a fixed height or min-height matching your design */
+  justify-content: center; /* vertically center content */
+  /* if you want subtitle always below title, add: */
+  gap: 5px; /* small space between title and subtitle */
+}
+
+    .project-middle {
+  flex: 0.5;
+  min-width: 100px;
+  position: relative;
+  z-index: 1;
+  display: flex; /* enable flex layout */
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center */
+}
+
+.project-middle img {
+  max-width: 100%;
+  max-height: 60px; /* adjust as needed */
+  object-fit: contain;
+}
+
+    .project-image {
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .project-image img {
+      max-width: 100%;
+      height: auto;
+      max-height: 330px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .project-image img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Modal for image zoom */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome</h1>
+    <p>
+      Hi, I'm Johnny – an enthusiast for <span>technology</span> and all
+      <span class="highlight">beautiful</span> things in life. This is my personal gallery.
+    </p>
+  </header>
+
+  <div class="section-header">Personal Projects</div>
+
+  <section class="gallery">
+    <!-- Vertical line through center -->
+    <div class="project-middle-line"></div>
+
+    <div class="project">
+      <div class="project-text">
+        <div class="project-title">A Living Space</div>
+        <div class="project-subtitle">(2022)</div>
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-image">
+        <img src="angle.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-image">
+        <img src="cave_city.jpg" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-text-r">
+        <div class="project-title">Cavern City</div>
+        <div class="project-subtitle">(2022)</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-text">
+        <div class="project-title">Cybernetic arm</div>
+        <div class="project-subtitle">(2023)</div>
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-image">
+        <img src="arm.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-image">
+        <img src="robot.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-text-r">
+        <div class="project-title">A verdant end</div>
+        <div class="project-subtitle">(2023)</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-text">
+        <div class="project-title">Night City</div>
+        <div class="project-subtitle">(2023)</div>
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-image">
+        <img src="selfie.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-image">
+        <img src="plant_house.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-text-r">
+        <div class="project-title">A cozy afternoon</div>
+        <div class="project-subtitle">(2024)</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-text">
+        <div class="project-title">City street</div>
+        <div class="project-subtitle">(2024)</div>
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-image">
+        <img src="street1.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-image">
+        <img src="smoking.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-text-r">
+        <div class="project-title">Character practice</div>
+        <div class="project-subtitle">(2024)</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-text">
+        <div class="project-title">Cathedral</div>
+        <div class="project-subtitle">(2025)</div>
+      </div>
+      <div class="project-middle">
+        <img src="dot.png" class = "do" onclick="zoomImage(this.src)">
+      </div>
+      <div class="project-image">
+        <img src="church.png" alt="Living space" onclick="zoomImage(this.src)">
+      </div>
+    </div>
+  </section>
+
+  <!-- Fullscreen image viewer -->
+  <div class="modal" id="imgModal" onclick="closeModal()">
+    <img id="modalImg" src="" alt="Zoomed image">
+  </div>
+
+  <script>
+    function zoomImage(src) {
+      const modal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("modalImg");
+      modalImg.src = src;
+      modal.classList.add("show");
+    }
+
+    function closeModal() {
+      document.getElementById("imgModal").classList.remove("show");
+    }
+  </script>
+
+</body>
+</html>
